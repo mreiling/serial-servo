@@ -44,6 +44,15 @@ async def to_code(config):
     ),
 )
 
+async def write_to_code(config, action_id, template_arg, args):
+    paren = await cg.get_variable(config[CONF_ID])
+    var = cg.new_Pvariable(action_id, template_arg, paren)
+    cg.add(var.set_servoid(config[CONF_SERVO]))
+    template_ = await cg.templatable(config[CONF_POSITION], args, int)
+    cg.add(var.set_position(template_))
+    cg.add(var.set_speed(config[CONF_SPEED]))
+    return var
+
 @automation.register_action(
     "serialservo.setid",
     ServoSetIDAction,
@@ -60,8 +69,5 @@ async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
     cg.add(var.set_servoid(config[CONF_SERVO]))
-    template_ = await cg.templatable(config[CONF_POSITION], args, int)
-    cg.add(var.set_position(template_))
-    cg.add(var.set_speed(config[CONF_SPEED]))
     cg.add(var.set_speed(config[CONF_NEWID]))
     return var
