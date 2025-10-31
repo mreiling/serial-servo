@@ -59,8 +59,8 @@ async def write_to_code(config, action_id, template_arg, args):
     cv.Schema(
         {
             cv.Required(CONF_ID): cv.use_id(SerialServo),
-            cv.Required(CONF_SERVO): cv.int_range(1,253),
-            cv.Required(CONF_NEWID): cv.int_range(1,253),
+            cv.Required(CONF_SERVO): cv.templatable(cv.int_range(1, 25)),
+            cv.Required(CONF_NEWID): ccv.templatable(cv.int_range(1, 25)),
         }
     ),
 )
