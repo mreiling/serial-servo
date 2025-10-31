@@ -43,7 +43,7 @@ template<typename... Ts> class ServoSetIDAction : public Action<Ts...> {
   ServoSetIDAction(SerialServo *servo) : servo_(servo) {}
   TEMPLATABLE_VALUE(int, servoid)
   TEMPLATABLE_VALUE(int, newservoid)
-  void play(Ts... x) override { this->servo_->setservoid(this->servoid_.value(x...),this->newservoid.value(x...)); }
+  void play(Ts... x) override { this->servo_->setid(this->servoid_.value(x...),this->newservoid.value(x...)); }
 
  protected:
   SerialServo *servo_;
