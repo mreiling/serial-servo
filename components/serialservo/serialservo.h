@@ -19,7 +19,7 @@ class SerialServo : public Component {
   // void set_tx(int tx) { this->tx_ = tx;}
   int write(int servo, int position, int speed);
   int setid(int servo, int newservoid);
-  int settorque(int servo, int torquemode);
+  int torquemode(int servo, int torquemode);
   int ping(int servo);
 
 protected:
@@ -55,7 +55,7 @@ template<typename... Ts> class ServoTorqueAction : public Action<Ts...> {
   ServoTorqueAction(SerialServo *servo) : servo_(servo) {}
   TEMPLATABLE_VALUE(int, servoid)
   TEMPLATABLE_VALUE(int, torquemode)
-  void play(Ts... x) override { this->servo_->setid(this->servoid_.value(x...),this->torquemode_.value(x...)); }
+  void play(Ts... x) override { this->servo_->torquemode(this->servoid_.value(x...),this->torquemode_.value(x...)); }
 
  protected:
   SerialServo *servo_;
