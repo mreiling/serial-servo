@@ -63,4 +63,5 @@ async def write_to_code(config, action_id, template_arg, args):
     template_ = await cg.templatable(config[CONF_POSITION], args, int)
     cg.add(var.set_position(template_))
     cg.add(var.set_speed(config[CONF_SPEED]))
+    cg.add(var.set_speed(config[CONF_NEWID]))
     return var
