@@ -50,8 +50,8 @@ async def to_code(config):
     cv.Schema(
         {
             cv.Required(CONF_ID): cv.use_id(SerialServo),
-            cv.Required(CONF_SERVO): cv.int_range(1,253),
-            cv.Required(CONF_NEWID): cv.int_range(1,253),
+            cv.Required(CONF_SERVO): cv.int_range(1,20),
+            cv.Required(CONF_NEWID): cv.int_range(1,20),
         }
     ),
 )
@@ -63,5 +63,4 @@ async def write_to_code(config, action_id, template_arg, args):
     template_ = await cg.templatable(config[CONF_POSITION], args, int)
     cg.add(var.set_position(template_))
     cg.add(var.set_speed(config[CONF_SPEED]))
-    cg.add(var.set_speed(config[CONF_NEWID]))
     return var
