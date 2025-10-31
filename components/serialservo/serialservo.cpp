@@ -48,5 +48,11 @@ int SerialServo::setid(int servo, int newservoid) {
   return res;
 }
 
+int SerialServo::settorque(int servo, int torquemode) {
+  int res = sc.EnableTorque(servo,torquemode)
+  ESP_LOGI(TAG, "Set servo %d torque mode to %d", servo,torquemode);
+  return res;
+}
+
 }  // namespace serialservo
 }  // namespace esphome

@@ -7,6 +7,7 @@ CODEOWNERS = ["@mreiling"]
 
 CONF_SERVO = "servo"
 CONF_NEWID = "newservoid"
+CONF_TORQUE = "torquemode"
 
 ss_ns = cg.esphome_ns.namespace("serialservo")
 SerialServo = ss_ns.class_(
@@ -15,6 +16,7 @@ SerialServo = ss_ns.class_(
 
 ServoWriteAction = ss_ns.class_("ServoWriteAction", automation.Action)
 ServoSetIDAction = ss_ns.class_("ServoSetIDAction", automation.Action)
+ServoSetIDAction = ss_ns.class_("ServoTorqueAction", automation.Action)
 
 CONFIG_SCHEMA = (
     cv.Schema(
@@ -72,4 +74,25 @@ async def write_to_code(config, action_id, template_arg, args):
     cg.add(var.set_servoid(template_))
     template_ = await cg.templatable(config[CONF_NEWID], args, int)
     cg.add(var.set_newservoid(template_))
+    return var
+
+@automation.register_action(
+    "serialservo.torquemode",
+    ServoTorqueAction,
+    cv.Schema(
+        {
+            cv.Required(CONF_ID): cv.use_id(SerialServo),
+            cv.Required(CONF_SERVO): cv.templatable(cv.int_range(1, 25)),
+            cv.Required(CONF_TORQUE): cv.templatable(cv.int_range(0, 1)),
+        }
+    ),
+)
+
+async def write_to_code(config, action_id, template_arg, args):
+    paren = await cg.get_variable(config[CONF_ID])
+    var = cg.new_Pvariable(action_id, template_arg, paren)
+    template_ = await cg.templatable(config[CONF_SERVO], args, int)
+    cg.add(var.set_servoid(template_))
+    template_ = await cg.templatable(config[CONF_TORQUE], args, int)
+    cg.add(var.set_torquemode(template_))
     return var
