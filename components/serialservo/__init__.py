@@ -5,7 +5,7 @@ from esphome.const import CONF_ID, CONF_POSITION, CONF_RX_PIN, CONF_TX_PIN, CONF
 
 CODEOWNERS = ["@mreiling"]
 
-CONF_SERVO = "servoid"
+CONF_SERVO = "servo"
 CONF_NEWID = "newservoid"
 
 ss_ns = cg.esphome_ns.namespace("serialservo")
