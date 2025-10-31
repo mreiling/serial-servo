@@ -32,7 +32,7 @@ template<typename... Ts> class ServoWriteAction : public Action<Ts...> {
   TEMPLATABLE_VALUE(int, servoid)
   TEMPLATABLE_VALUE(int, position)
   TEMPLATABLE_VALUE(int, speed)
-  void play(Ts... x) override { this->servo_->write(this->servo_.value(x...),this->position_.value(x...),this->speed_.value(x...)); }
+  void play(Ts... x) override { this->servo_->write(this->servoid_.value(x...),this->position_.value(x...),this->speed_.value(x...)); }
 
  protected:
   SerialServo *servo_;
@@ -41,9 +41,9 @@ template<typename... Ts> class ServoWriteAction : public Action<Ts...> {
 template<typename... Ts> class ServoSetIDAction : public Action<Ts...> {
  public:
   ServoSetIDAction(SerialServo *servo) : servo_(servo) {}
-  TEMPLATABLE_VALUE(int, servo)
+  TEMPLATABLE_VALUE(int, servoid)
   TEMPLATABLE_VALUE(int, newservoid)
-  void play(Ts... x) override { this->servo_->setservoid(this->servo_.value(x...),this->newservoid.value(x...)); }
+  void play(Ts... x) override { this->servo_->setservoid(this->servoid_.value(x...),this->newservoid.value(x...)); }
 
  protected:
   SerialServo *servo_;
