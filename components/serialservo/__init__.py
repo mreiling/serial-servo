@@ -69,5 +69,5 @@ async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
     cg.add(var.set_servoid(config[CONF_SERVO]))
-    cg.add(var.set_speed(config[CONF_NEWID]))
+    cg.add(var.set_newservoid(config[CONF_NEWID]))
     return var
