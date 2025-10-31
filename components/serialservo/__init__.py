@@ -15,6 +15,7 @@ SerialServo = ss_ns.class_(
 )
 
 ServoWriteAction = ss_ns.class_("ServoWriteAction", automation.Action)
+ServoSetIDAction = ss_ns.class_("ServoSetIDAction", automation.Action)
 
 CONFIG_SCHEMA = (
     cv.Schema(
