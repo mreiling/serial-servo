@@ -14,7 +14,7 @@ SerialServo = ss_ns.class_(
 )
 
 ServoWriteAction = ss_ns.class_("ServoWriteAction", automation.Action)
-#ServoSetIDAction = ss_ns.class_("ServoSetIDAction", automation.Action)
+ServoSetIDAction = ss_ns.class_("ServoSetIDAction", automation.Action)
 
 CONFIG_SCHEMA = (
     cv.Schema(
@@ -44,17 +44,17 @@ async def to_code(config):
     ),
 )
 
-# @automation.register_action(
-#     "serialservo.setid",
-#     ServoSetIDAction,
-#     cv.Schema(
-#         {
-#             cv.Required(CONF_ID): cv.use_id(SerialServo),
-#             cv.Required(CONF_SERVO): cv.int_range(1,253),
-#             cv.Required(CONF_NEWID): cv.int_range(1,253),
-#         }
-#     ),
-# )
+@automation.register_action(
+    "serialservo.setid",
+    ServoSetIDAction,
+    cv.Schema(
+        {
+            cv.Required(CONF_ID): cv.use_id(SerialServo),
+            cv.Required(CONF_SERVO): cv.int_range(1,253),
+            cv.Required(CONF_NEWID): cv.int_range(1,253),
+        }
+    ),
+)
 
 async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
