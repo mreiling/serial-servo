@@ -18,6 +18,7 @@ class SerialServo : public Component {
   // void set_rx(int rx) { this->rx_ = rx;}
   // void set_tx(int tx) { this->tx_ = tx;}
   int write(int servo, int position, int speed);
+  int setid(int servo, int newservoid);
   int ping(int servo);
 
 protected:
@@ -28,7 +29,7 @@ protected:
 template<typename... Ts> class ServoWriteAction : public Action<Ts...> {
  public:
   ServoWriteAction(SerialServo *servo) : servo_(servo) {}
-  TEMPLATABLE_VALUE(int, servo)
+  TEMPLATABLE_VALUE(int, servoid)
   TEMPLATABLE_VALUE(int, position)
   TEMPLATABLE_VALUE(int, speed)
   void play(Ts... x) override { this->servo_->write(this->servo_.value(x...),this->position_.value(x...),this->speed_.value(x...)); }

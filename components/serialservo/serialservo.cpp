@@ -40,7 +40,7 @@ int SerialServo::write(int servo, int position, int speed) {
   return res;
 }
 
-int SerialServo::setservoid(int servo, int servoid, int newservoid) {
+int SerialServo::setid(int servoid, int newservoid) {
   sc.unLockEprom(servoid);
   int res = sc.writeByte(servoid, SMS_STS_ID, newservoid);
   sms_sts.LockEprom(newservoid);
