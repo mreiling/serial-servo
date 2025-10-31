@@ -43,7 +43,7 @@ int SerialServo::write(int servo, int position, int speed) {
 int SerialServo::setid(int servo, int newservoid) {
   sc.unLockEprom(servoid);
   int res = sc.writeByte(servoid, SMS_STS_ID, newservoid);
-  sms_sts.LockEprom(newservoid);
+  sc.LockEprom(newservoid);
   ESP_LOGI(TAG, "Set servo %d to id %d", servo,newservoid);
   return res;
 }
