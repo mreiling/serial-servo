@@ -6,6 +6,8 @@ from esphome.const import CONF_ID, CONF_POSITION, CONF_RX_PIN, CONF_TX_PIN, CONF
 CODEOWNERS = ["@mreiling"]
 
 CONF_SERVO = "servo"
+CONF_SERVOID = "servoid"
+CONF_NEWSERVOID = "newservoid"
 
 ss_ns = cg.esphome_ns.namespace("serialservo")
 SerialServo = ss_ns.class_(
@@ -38,6 +40,18 @@ async def to_code(config):
             cv.Required(CONF_SERVO): cv.int_range(1,253),
             cv.Required(CONF_POSITION):  cv.templatable(cv.int_range(1, 1000)),  
             cv.Required(CONF_SPEED):  cv.int_range(1, 1500),
+        }
+    ),
+)
+
+@automation.register_action(
+    "serialservo.setid",
+    ServoSetIDAction,
+    cv.Schema(
+        {
+            cv.Required(CONF_ID): cv.use_id(SerialServo),
+            cv.Required(CONF_SERVOID): cv.int_range(1,253),
+            cv.Required(CONF_NEWSERVOID): cv.int_range(1,253),
         }
     ),
 )

@@ -40,5 +40,13 @@ int SerialServo::write(int servo, int position, int speed) {
   return res;
 }
 
+int SerialServo::setservoid(int servo, int servoid, int newservoid) {
+  int res = sc.unLockEprom(servoid);
+  sc.writeByte(servoid, SMS_STS_ID, newservoid);
+  sms_sts.LockEprom(newservoid);
+  ESP_LOGI(TAG, "Set servo %d to id %d", servo,newservoid);
+  return res;
+}
+
 }  // namespace serialservo
 }  // namespace esphome

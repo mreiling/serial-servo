@@ -37,5 +37,17 @@ template<typename... Ts> class ServoWriteAction : public Action<Ts...> {
   SerialServo *servo_;
 };
 
+template<typename... Ts> class ServoSetIDAction : public Action<Ts...> {
+ public:
+  ServoWriteAction(SerialServo *servo) : servo_(servo) {}
+  TEMPLATABLE_VALUE(int, servoid)
+  TEMPLATABLE_VALUE(int, servoid)
+  TEMPLATABLE_VALUE(int, newservoid)
+  void play(Ts... x) override { this->servo_->setservoid(this->servoid_.value(x...),this->servoid_.value(x...),this->newservoid_.value(x...)); }
+
+ protected:
+  SerialServo *servo_;
+};
+
 }  // namespace serialservo
 }  // namespace esphome
