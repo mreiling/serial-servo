@@ -44,6 +44,7 @@ async def to_code(config):
             cv.Required(CONF_SPEED):  cv.int_range(1, 1500),
         }
     ),
+    synchronous=True,
 )
 
 async def write_to_code(config, action_id, template_arg, args):
@@ -65,6 +66,7 @@ async def write_to_code(config, action_id, template_arg, args):
             cv.Required(CONF_NEWID): cv.templatable(cv.int_range(1, 253)),
         }
     ),
+    synchronous=True,
 )
 
 async def write_to_code(config, action_id, template_arg, args):
@@ -86,6 +88,7 @@ async def write_to_code(config, action_id, template_arg, args):
             cv.Required(CONF_TORQUE): cv.templatable(cv.int_range(0, 1)),
         }
     ),
+    synchronous=True,
 )
 
 async def write_to_code(config, action_id, template_arg, args):
