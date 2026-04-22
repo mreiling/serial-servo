@@ -51,7 +51,7 @@ async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
     cg.add(var.set_servoid(config[CONF_SERVO]))
-    template_ = await cg.templatable(config[CONF_POSITION], args, int)
+    template_ = await cg.templatable(config[CONF_POSITION], args, cg.int_)
     cg.add(var.set_position(template_))
     cg.add(var.set_speed(config[CONF_SPEED]))
     return var
@@ -72,9 +72,9 @@ async def write_to_code(config, action_id, template_arg, args):
 async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
-    template_ = await cg.templatable(config[CONF_SERVO], args, int)
+    template_ = await cg.templatable(config[CONF_SERVO], args, cg.int_)
     cg.add(var.set_servoid(template_))
-    template_ = await cg.templatable(config[CONF_NEWID], args, int)
+    template_ = await cg.templatable(config[CONF_NEWID], args, cg.int_)
     cg.add(var.set_newservoid(template_))
     return var
 
@@ -94,8 +94,8 @@ async def write_to_code(config, action_id, template_arg, args):
 async def write_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
-    template_ = await cg.templatable(config[CONF_SERVO], args, int)
+    template_ = await cg.templatable(config[CONF_SERVO], args, cg.int_)
     cg.add(var.set_servoid(template_))
-    template_ = await cg.templatable(config[CONF_TORQUE], args, int)
+    template_ = await cg.templatable(config[CONF_TORQUE], args, cg.int_)
     cg.add(var.set_torquemode(template_))
     return var
